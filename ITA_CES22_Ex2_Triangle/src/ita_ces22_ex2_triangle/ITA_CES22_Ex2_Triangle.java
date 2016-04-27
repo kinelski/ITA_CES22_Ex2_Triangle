@@ -35,9 +35,39 @@ class Square extends Shape{
     }
 }
 
+class Triangle extends Shape{
+    private int a, b, c;
+    
+    public Triangle (String _name){
+        super(_name);
+        a = b = c = 1;
+    }
+    public Triangle (String _name, int _a, int _b, int _c){
+        super(_name);
+        
+        a = _a; b = _b; c = _c;
+        
+        if (a >= b+c || b >= c+a || c >= a+b)
+            a = b = c = 1; //Não respeita a desigualdade triangular
+    }
+    
+    public float calculateArea(){
+        float area;
+        float p = ((float)(a+b+c))/2; //Semi-perímetro
+        
+        area = (float) Math.sqrt(p*(p-a)*(p-b)*(p-c)); //Fórmula de Heron
+        return area;
+    }
+}
+
 public class ITA_CES22_Ex2_Triangle {
 
     public static void main(String[] args) {
+        
+        //Teste simples
+        Triangle t = new Triangle("Eustácio", 3, 4, 5);
+        System.out.println (t.calculateArea());
+        
     }
     
 }
